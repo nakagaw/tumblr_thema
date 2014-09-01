@@ -9,8 +9,11 @@
     <meta name="color:Background" content="#fff"/>
     <meta name="color:Text" content="#444"/>
     <meta name="color:Link" content="#09b"/>
-    <title>{Title}{block:PostSummary} &mdash; {PostSummary}{/block:PostSummary}</title>
-    {block:Description}<meta name="description" content="{MetaDescription}">{/block:Description}
+    <title>{block:SearchPage}, Search results for: {SearchQuery}{/block:SearchPage}{block:PostSummary}{PostSummary} - {/block:PostSummary}{Title}</title>
+    <meta name="keywords" content="{block:Permalink}{block:Posts}{block:Tags}{Tag}, {/block:Tags}{/block:Posts}{/block:Permalink}" />
+    {block:Description}
+       <meta name="description" content="{block:PostSummary}{PostSummary} - {/block:PostSummary}{Title} - {Description}" /> 
+    {/block:Description}
     <link rel="shortcut icon" href="{Favicon}">
     <link rel="apple-touch-icon" href="{PortraitURL-128}">
     <link rel="alternate" type="application/rss+xml" href="{RSS}">
@@ -51,12 +54,11 @@
       h1, .h1 {
         font-size: 32px;
       }
-
-      .tc-item,
       h2, .h2 {
         font-size: 24px;
       }
-      
+
+       .tc-item,
       h3, .h3 {
         font-size: 20px;
       }
@@ -76,20 +78,6 @@
       }
       
       p, ul, ol { margin-top: 1em; }
-      
-            @media screen and (min-width: 480px) {
-              h1, .h1 { font-size: 48px; }
-              h2, .h2 { font-size: 32px; }
-              h3, .h3 { font-size: 24px; }
-              p, .p, ul, ol { font-size: 20px;}
-              small, .small { font-size: 16px;}
-            }
-            
-            @media screen and (min-width: 640px) {
-              h1, .h1 { font-size: 64px; }
-              h2, .h2 { font-size: 48px; } 
-              h3, .h3 { font-size: 32px; }
-            }
       
       
       .wrap {
@@ -159,7 +147,8 @@
       header a:hover {
         text-decoration: none;
       }
-      
+
+
       .post img,
       .photoset,
       .photoset img,
@@ -346,13 +335,33 @@
 
       .time {
         padding-right: 0.5em;
-        white-space: nowrap;
+        display: inline-block;
       }
 
       .tag {
         padding-left: 0.5em;
+        display: inline-block;
       }
 
+            @media screen and (min-width: 480px) {
+              h1, .h1 { font-size: 48px; }
+              h2, .h2 { font-size: 32px; }
+              h3, .h3 { font-size: 24px; }
+              p, .p, ul, ol { font-size: 20px;}
+              small, .small { font-size: 16px;}
+            }
+            
+            @media screen and (min-width: 640px) {
+              h1, .h1 { font-size: 64px; }
+              h2, .h2 { font-size: 48px; } 
+              h3, .h3 { font-size: 32px; }
+            }
+      
+      
+            @media screen and (max-width: 640px) {
+              .posts .h1 {margin-top: 2em;}
+            }
+      
       {CustomCSS}
       
     </style>
@@ -392,7 +401,7 @@
           <article class="post {PostType}">
             {block:Text}
               {block:Title}
-                  <span class="time">{block:Date}{Year}年{MonthNumber}月{DayOfMonth}日({DayOfWeek}){/block:Date}{block:HasTags}{block:Tags}</span><span class="tag"># <a href="{TagURL}">{Tag}</a>{/block:Tags}</span>{/block:HasTags}
+                 {block:Date}<span class="time">{Year}年{MonthNumber}月{DayOfMonth}日({DayOfWeek})</span>{/block:Date}{block:HasTags}{block:Tags}<span class="tag"># <a href="{TagURL}">{Tag}</a></span>{/block:Tags}{/block:HasTags}
                 <a href="{Permalink}" class="post-title"><h2>{Title}</h2></a>
               {/block:Title}
               
@@ -403,7 +412,7 @@
             {/block:Text}
 
             {block:Photo}
-                  <span class="time">{block:Date}{Year}年{MonthNumber}月{DayOfMonth}日({DayOfWeek}){/block:Date}{block:HasTags}{block:Tags}</span><span class="tag"># <a href="{TagURL}">{Tag}</a>{/block:Tags}</span>{/block:HasTags}
+                   {block:Date}<span class="time">{Year}年{MonthNumber}月{DayOfMonth}日({DayOfWeek})</span>{/block:Date}{block:HasTags}{block:Tags}<span class="tag"># <a href="{TagURL}">{Tag}</a>{/block:Tags}</span>{/block:HasTags}
               
               {LinkOpenTag}
                  <div class="IV"><img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"></div>
@@ -415,7 +424,7 @@
             {/block:Photo}
 
             {block:Photoset}
-                  <span class="time">{block:Date}{Year}年{MonthNumber}月{DayOfMonth}日({DayOfWeek}){/block:Date}{block:HasTags}{block:Tags}</span><span class="tag"># <a href="{TagURL}">{Tag}</a>{/block:Tags}</span>{/block:HasTags}
+                 {block:Date}<span class="time">{Year}年{MonthNumber}月{DayOfMonth}日({DayOfWeek})</span>{/block:Date}{block:HasTags}{block:Tags}<span class="tag"># <a href="{TagURL}">{Tag}</a></span>{/block:Tags}{/block:HasTags}
 
               {Photoset}
 
@@ -470,7 +479,7 @@
             {/block:Audio}
 
             {block:Video}
-                  <span class="time">{block:Date}{Year}年{MonthNumber}月{DayOfMonth}日({DayOfWeek}){/block:Date}{block:HasTags}{block:Tags}</span><span class="tag"># <a href="{TagURL}">{Tag}</a>{/block:Tags}</span>{/block:HasTags}
+                 {block:Date}<span class="time">{Year}年{MonthNumber}月{DayOfMonth}日({DayOfWeek})</span>{/block:Date}{block:HasTags}{block:Tags}<span class="tag"># <a href="{TagURL}">{Tag}</a></span>{/block:Tags}{/block:HasTags}
 
               <div class="IV">
               {Video-700}
@@ -497,17 +506,6 @@
                   {/block:ContentSource}
                 </ul>
                 
-                {block:PermalinkPage}
-                    {block:HasTags}
-                        <ul class="tags">
-                          {block:Tags}
-                            <li>
-                              <a href="{TagURL}">#{Tag}</a>
-                            </li>
-                          {/block:Tags}
-                        </ul>
-                    {/block:HasTags}      
-                {/block:PermalinkPage}
                               
               </footer>
             {/block:Date}
